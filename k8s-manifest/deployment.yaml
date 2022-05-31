@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-employee-demo-deployment
+  labels:
+    app: springboot-employee-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-employee-demo
+  template:
+    metadata:
+      labels:
+        app: springboot-employee-demo
+    spec:
+      containers:
+      - name: springboot-employee-demo
+        image: us-west1-docker.pkg.dev/backend-svc-01/gke-demo-employee/gke-employee-image:5ef7382
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 200m
+          requests:
+            cpu: 100m
+        livenessProbe:
+           httpGet:
+             path: /
+             port: 8080
+           failureThreshold: 2
+           periodSeconds: 5
+           initialDelaySeconds: 80
