@@ -1,0 +1,13 @@
+apiVersion: networking.gke.io/v1beta1
+kind: ServiceAttachment
+metadata:
+ name: springboot-demo-svc-attachment
+ namespace: default
+spec:
+ connectionPreference: ACCEPT_AUTOMATIC
+ natSubnets:
+ - psc-subnet
+ proxyProtocol: false
+ resourceRef:
+   kind: Service
+   name: springboot-demo-ilb

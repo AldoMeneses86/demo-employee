@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-demo-ilb
+  annotations:
+    networking.gke.io/load-balancer-type: "Internal"
+spec:
+  type: LoadBalancer
+  #loadBalancerIP: 10.128.0.11
+  selector:
+    app: springboot-employee-demo
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: http

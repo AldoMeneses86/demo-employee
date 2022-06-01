@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class EmployeeController {
 
@@ -28,13 +27,26 @@ public class EmployeeController {
 	public Employee delete(@PathVariable("id") int id) {
 		Employee deletedEmp = null;
 		for (Employee emp : employees) {
-			if (emp.getEmpId().equals(id)) {
+			if (emp.getEmpId().equals(String.valueOf(id))) {
 				employees.remove(emp);
 				deletedEmp = emp;
 				break;
 			}
 		}
 		return deletedEmp;
+	}
+
+	@RequestMapping(path = { "/{id}" }, method = RequestMethod.GET, produces = "application/json")
+	public Employee get(@PathVariable("id") int id) {
+		Employee getEmployee = null;
+		for (Employee emp : employees) {
+			if (emp.getEmpId().equals(String.valueOf(id))) {
+				getEmployee = emp;
+				System.out.println(getEmployee);
+				break;
+			}
+		}
+		return getEmployee;
 	}
 
 	@PostMapping

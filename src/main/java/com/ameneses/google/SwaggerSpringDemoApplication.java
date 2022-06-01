@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class SwaggerSpringDemoApplication {
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/healthCheck", method = RequestMethod.GET)
 	public String healthCheck() {
 		return "200 OK";
 	}
